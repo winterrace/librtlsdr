@@ -1,10 +1,10 @@
-fl2k_win
+librtlsdr
 ===========
 This is a fork of https://github.com/steve-m/librtlsdr with project files for a native compilation in Microsoft Visual Studio (verified with VS 2015), Win64. See release section for pre-compiled binaries.
 
 See the vs15 folder for compilation instructions.
 
-Original readme from http://git.osmocom.org/osmo-fl2k:
+Original readme from https://github.com/steve-m/librtlsdr:
 ===========
 rtl-sdr
 turns your Realtek RTL2832 based DVB dongle into a SDR receiver
