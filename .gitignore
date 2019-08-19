@@ -39,3 +39,9 @@ CMakeCache.txt
 */CMakeFiles
 CMakeFiles
 *.cmake
+*.tlog
+*.idb
+*.iobj
+*.ipdb
+*.exp
+*.db
