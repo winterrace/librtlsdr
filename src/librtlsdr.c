@@ -1628,6 +1628,9 @@ found:
 	return 0;
 err:
 	if (dev) {
+		if (dev->devh)
+			libusb_close(dev->devh);
+
 		if (dev->ctx)
 			libusb_exit(dev->ctx);
 
@@ -1748,18 +1751,33 @@ static int _rtlsdr_alloc_async_buffers(rtlsdr_dev_t *dev)
 	dev->xfer_buf = malloc(dev->xfer_buf_num * sizeof(unsigned char *));
 	memset(dev->xfer_buf, 0, dev->xfer_buf_num * sizeof(unsigned char *));
 
-#if defined (__linux__) && LIBUSB_API_VERSION >= 0x01000105
+#if defined(ENABLE_ZEROCOPY) && defined (__linux__) && LIBUSB_API_VERSION >= 0x01000105
 	fprintf(stderr, "Allocating %d zero-copy buffers\n", dev->xfer_buf_num);
 
 	dev->use_zerocopy = 1;
 	for (i = 0; i < dev->xfer_buf_num; ++i) {
 		dev->xfer_buf[i] = libusb_dev_mem_alloc(dev->devh, dev->xfer_buf_len);
 
-		if (!dev->xfer_buf[i]) {
+		if (dev->xfer_buf[i]) {
+			/* Check if Kernel usbfs mmap() bug is present: if the
+			 * mapping is correct, the buffers point to memory that
+			 * was memset to 0 by the Kernel, otherwise, they point
+			 * to random memory. We check if the buffers are zeroed
+			 * and otherwise fall back to buffers in userspace.
+			 */
+			if (dev->xfer_buf[i][0] || memcmp(dev->xfer_buf[i],
+							  dev->xfer_buf[i] + 1,
+							  dev->xfer_buf_len - 1)) {
+				fprintf(stderr, "Detected Kernel usbfs mmap() "
+						"bug, falling back to buffers "
+						"in userspace\n");
+				dev->use_zerocopy = 0;
+				break;
+			}
+		} else {
 			fprintf(stderr, "Failed to allocate zero-copy "
 					"buffer for transfer %d\nFalling "
 					"back to buffers in userspace\n", i);
-
 			dev->use_zerocopy = 0;
 			break;
 		}
