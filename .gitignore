@@ -45,3 +45,7 @@ CMakeFiles
 *.ipdb
 *.exp
 *.db
+*.ipch
+*.FileListAbsolute.txt
+*.db-wal
+*.db-shm
