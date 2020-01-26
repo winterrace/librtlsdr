@@ -1,11 +1,11 @@
 librtlsdr
 ===========
-This is a fork of https://github.com/steve-m/librtlsdr with project files for a native compilation in Microsoft Visual Studio (verified with VS 2015), Win64. See release section for pre-compiled binaries.
+This is a fork of https://github.com/steve-m/librtlsdr with project files for a native compilation in Microsoft Visual Studio (verified with VS 2015 and VS 2019), Win64. See release section for pre-compiled binaries.
 
-You might need to grab the Visual C++ Redistributable for Visual Studio 2015
-https://www.microsoft.com/en-us/download/details.aspx?id=53587
+You might need to grab the Visual C++ Redistributable for Visual Studio 2015-2019:
+https://aka.ms/vs/16/release/vc_redist.x64.exe (or via https://support.microsoft.com/de-de/help/2977003/the-latest-supported-visual-c-downloads)
 
-See the vs15 folder for compilation instructions.
+See the vs15/vs19 folders for compilation instructions.
 
 Original readme from https://github.com/steve-m/librtlsdr:
 ===========
