@@ -111,11 +111,11 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>rtlsdr_STATIC;_TIMESPEC_DEFINED;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>rtlsdr_STATIC;_TIMESPEC_DEFINED;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\include;..\..\..\libusb\libusb;..\..\..\pthread\include</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <OmitFramePointers />
+      <OmitFramePointers>false</OmitFramePointers>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader />
     </ClCompile>
@@ -126,15 +126,15 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <ImageHasSafeExceptionHandlers />
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>rtlsdr_STATIC;_TIMESPEC_DEFINED;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>rtlsdr_STATIC;_TIMESPEC_DEFINED;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\include;..\..\..\libusb\libusb;..\..\..\pthread\include</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
-      <OmitFramePointers />
+      <OmitFramePointers>false</OmitFramePointers>
       <PrecompiledHeader />
     </ClCompile>
     <Link>
